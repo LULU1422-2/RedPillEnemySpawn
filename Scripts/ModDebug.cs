@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RedPill
+namespace RedPill.Scripts
 {
     internal static class ModDebug
     {
@@ -11,7 +11,7 @@ namespace RedPill
 
         internal static void Initialize(string GUID)
         {
-            manualLogSource = BepInEx.Logging.Logger.CreateLogSource(GUID);
+            manualLogSource = Logger.CreateLogSource(GUID);
         }
 
         internal static void LogInfo(string message)
@@ -28,10 +28,10 @@ namespace RedPill
 #endif
         }
 
-        internal static void LogError(string message) 
+        internal static void LogError(string message)
         {
 #if DEBUG
-            manualLogSource.LogError(message); 
+            manualLogSource.LogError(message);
 #endif
         }
     }

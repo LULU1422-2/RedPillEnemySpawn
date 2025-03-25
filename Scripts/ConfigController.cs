@@ -3,18 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RedPill
+namespace RedPill.Scripts
 {
     internal static class ConfigController
     {
+        internal enum SpawnLocation
+        {
+            Inside,
+            Outside,
+            Both
+        }
+
         internal static ConfigEntry<int> spawnRarityGeneral;
         internal static ConfigEntry<int> spawnCount;
+        internal static ConfigEntry<SpawnLocation> spawnLocation;
+
         internal static ConfigEntry<bool> spawnRarityFromDifficulty;
 
         internal static ConfigEntry<bool> useOriginalAI;
         internal static ConfigEntry<float> agentSpeedBase;
         internal static ConfigEntry<float> agentSpeedSlowDownAmount;
-        internal static ConfigEntry <float> playerDetectionRadius;
+        internal static ConfigEntry<float> playerDetectionRadius;
 
         internal static void Initialize(ConfigFile configFile)
         {
@@ -33,6 +42,13 @@ namespace RedPill
                 "Max count",
                 1,
                 "How many Red Pills can potentially spawn in one day"
+            );
+
+            spawnLocation = configFile.Bind(
+                "Spawning",
+                "Location",
+                SpawnLocation.Both,
+                "<description of spawn location>"
             );
 
             //spawnRarityFromDifficulty = configFile.Bind(

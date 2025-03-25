@@ -1,5 +1,9 @@
 # Red Pill Changelog
 
+## 0.3.0
+### Added
+- Obunga but outside
+
 ## 0.2.3
 ### Added
 - Tidbits of information in config file

@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using RedPill.Scripts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,7 +33,6 @@ namespace RedPill.Patches
                 if (e.name == "RedPillEnemyType")
                 {
                     ModDebug.LogInfo($"Found {e.name}!");
-                    e.MaxCount = ConfigController.spawnCount.Value;
                     redPillEnemyType = e;
                 }
                 ModDebug.LogInfo($"{e.name}, max: {e.MaxCount}, curve: {e.probabilityCurve.length}, spawningDisabled: {e.spawningDisabled}, power: {e.PowerLevel}");
@@ -43,10 +43,20 @@ namespace RedPill.Patches
             {
                 redPill.enemyType = redPillEnemyType;
                 redPill.enemyType.probabilityCurve = probabilityCurve;
-                
                 redPill.enemyType.PowerLevel = 2;
+                redPill.enemyType.MaxCount = ConfigController.spawnCount.Value;
                 redPill.rarity = ConfigController.spawnRarityGeneral.Value;
-                RoundManager.Instance.currentLevel.Enemies.Add(redPill);
+
+                if (ConfigController.spawnLocation.Value != ConfigController.SpawnLocation.Outside)
+                {
+                    RoundManager.Instance.currentLevel.Enemies.Add(redPill);
+                    ModDebug.LogInfo("Added RedPill to inside enemies");
+                }
+                if (ConfigController.spawnLocation.Value != ConfigController.SpawnLocation.Inside)
+                {
+                    RoundManager.Instance.currentLevel.OutsideEnemies.Add(redPill);
+                    ModDebug.LogInfo("Added RedPill to outside enemies");
+                }
             }
 
             #region list all enemies

@@ -24,6 +24,5 @@ Or just edit the config file.
 ## Future Updates
 - Louder enemy sound (configurable)
 - Obunga ability to open doors (not by default, configurable)
-- Spawn Obunga outside (not by default, configurable)
 - Different rarity for each hazard level (configurable)
 - Obunga will not always know where you are (default, but configurable for my fellow deogen fans)
